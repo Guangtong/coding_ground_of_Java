@@ -1,0 +1,46 @@
+Book Title Goes Here
+====================
+Author's Name
+v1.0, 2003-12
+:doctype: book
+
+
+[dedication]
+Example Dedication
+------------------
+Optional dedication.
+
+This document is an AsciiDoc book skeleton containing briefly
+annotated example elements plus a couple of example index entries and
+footnotes.
+
+Books are normally used to generate DocBook markup and the titles of
+the preface, appendix, bibliography, glossary and index sections are
+significant ('specialsections').
+
+
+[preface]
+Example Preface
+---------------
+Optional preface.
+
+Preface Sub-section
+~~~~~~~~~~~~~~~~~
+Preface sub-section body.
+
+
+The First Chapter
+-----------------
+Chapters can contain sub-sections nested up to three deep.
+footnote:[An example footnote.]
+indexterm:[Example index entry]
+
+Chapters can have their own bibliography, glossary and index.
+
+And now for something completely different: ((monkeys)), lions and
+tigers (Bengal and Siberian) using the alternative syntax index
+entries.
+(((Big cats,Lions)))
+(((Big cats,Tigers,Bengal Tiger)))
+(((Big cats,Tigers,Siberian Tiger)))
+Note that multi-entry terms generate separate index entries.

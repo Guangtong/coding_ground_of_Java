@@ -1,0 +1,1 @@
+{"id":"java8","ext":"java","version":"JDK 1.8.0","compile":"javac HelloWorld.java","execute":"java -Xmx128M -Xms16M HelloWorld","preview":"","command":"","file":"/home/cg/src/samples/HelloWorld.java","url":"compile_java8_online.php","mode":"java"}

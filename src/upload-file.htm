@@ -1,0 +1,73 @@
+<style scoped>
+.f1{
+width:400px;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div class="easyui-panel" style="width:100%">
+<div style="padding:10px 60px 20px 60px">
+<div style="text-align:center;padding:5px">
+<p><img src="/images/file-upload.png"  style="width:60px; height:60px"/></p>
+<p>Select your file from any local drive to be uploaded to compileonline</p>
+</div>
+<form id="fileuploadform" method="POST" accept="text/plain" enctype="multipart/form-data">
+  <table style="width:100%; text-align: center">
+   <tr style="text-align:center;height:100px;">
+   <td>File:</td>
+   <td><input name="file" id="file" class="f1 easyui-filebox"></input></td>
+   </tr>
+   </table>
+</form>
+<div style="text-align:center;padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="uploadFile()" style="width:60px"> Upload </a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeSign()" style="width:60px"> Cancel </a>
+</div>
+<br>
+</div>
+<script>
+function uploadFile(){
+   var selected = $('#home').tree('getSelected');
+   if( selected ){
+        if( selected.type !== 'D' ){
+           $.messager.alert('Alert Message','Select a directory where file will be uploaded', 'info');
+           return false;
+        }
+   }else{
+        $.messager.alert('Alert Message','Select a directory where file will be uploaded', 'info');
+        return false;
+   }
+   $('#home').tree('expand', selected.target);
+
+  var inputs = {'hello': 'bye'};
+  var filename = null;
+   $('#fileuploadform').form('submit', {
+          url: HOME + "/upload_file?port=" + port,
+          onSubmit: function( param ){
+               var $file = $(this).find("input[type=file]");
+               filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+               if (!$file.val() || $file.val() == "") {
+                  $.messager.alert('Alert Message','No file selected to be uploaded!', 'info');
+                  return false;
+               }
+               param.cwd = selected.id;
+               $('#sign').window('close');
+               $("#loading").css({"visibility":"visible"});
+         },
+         success:function(data) {
+               var newfile = selected.id + "/" + filename;
+               $('#home').tree('append', {
+                  parent: selected.target,
+                  data: [{
+                      id: newfile,
+                      type: 'F',
+                      text: filename
+                   }]
+               });
+               var node = $('#home').tree('find', newfile);
+               $('#home').tree('select', node.target);
+               loadFile( node, true );
+               $("#loading").css({"visibility":"hidden"});
+         }
+    });
+}
+</script>
